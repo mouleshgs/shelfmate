@@ -1,7 +1,18 @@
 from argparse import ArgumentParser
+import api
+
+
 
 def search(args):
-    print(args.book_name)
+    result = api.search(args.book_name)
+
+    if result is None:
+        print("not found")
+        return
+
+    print(result['title'])
+    print(result['url'])
+    print(result['author'])
     
 
 def recommend(args):
