@@ -1,5 +1,6 @@
 from argparse import ArgumentParser
 import api
+import json 
 
 
 
@@ -10,9 +11,15 @@ def search(args):
         print("not found")
         return
 
-    print(result['title'])
-    print(result['url'])
-    print(result['author'])
+    for (idx, res) in enumerate(result, 1):
+        print(idx, ".")
+        print(res['title'])
+        print(res['url'])
+        print(res['author'])
+        print("-----------------")
+
+    with open(".last_search.json", "w") as file:
+        json.dump(result, file, indent=4)
     
 
 def recommend(args):

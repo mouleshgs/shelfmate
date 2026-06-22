@@ -8,24 +8,29 @@ def search(book_name):
         "User-Agent": "shelfmate/1.0 (shelfmate@gmail.com)"
     }
 
-    res = requests.get(url, params={"q": book_name, "limit" : "1"}, headers=custom_header)
+    res = requests.get(url, params={"q": book_name, "limit" : "5"}, headers=custom_header)
 
     data = res.json()
 
     if not data.get("docs"):
         return None
 
-    doc = data["docs"][0]
+    docs = data["docs"]
 
-    book_data = {
-        "title" : doc.get("title"),
-        "url": "https://openlibrary.org" + doc.get("key", ""),
-        "author": doc.get("author_name")[0]
-    }
+    books = []
 
+
+    for doc in docs:
+        book_data = {
+            "title" : doc.get("title"),
+            "url": "https://openlibrary.org" + doc.get("key", ""),
+            "author": doc.get("author_name")[0]
+        }
+
+        books.append(book_data)
     
 
-    return book_data
+    return books
 
     
 
