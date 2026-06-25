@@ -32,7 +32,5 @@ def search(book_name):
 
     return books
 
-    
-
 if __name__ == "__main__":
     search("white nights")
